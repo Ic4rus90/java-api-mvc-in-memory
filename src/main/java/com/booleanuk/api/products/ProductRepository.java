@@ -20,4 +20,13 @@ public class ProductRepository {
     public List<Product> getAll(){
         return this.productList;
     }
+
+    public Product getProductByID(int productID){
+        return productList.stream().
+                filter(p -> p.getId() == productID).
+                findFirst().
+                orElseThrow();
+    }
+
+
 }

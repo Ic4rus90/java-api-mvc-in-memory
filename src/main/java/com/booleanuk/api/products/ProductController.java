@@ -25,4 +25,10 @@ public class ProductController {
     public List<Product> getAll(){
         return this.repository.getAll();
     }
+
+    @GetMapping("/{productID}")
+    @ResponseStatus(HttpStatus.OK)
+    public Product getProductByID(@PathVariable int productID){
+        return this.repository.getProductByID(productID);
+    }
 }
