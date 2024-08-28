@@ -22,4 +22,16 @@ public class ProductRequest {
     public int getPrice(){
         return this.price;
     }
+
+    public void setName(String newProductName){
+        this.name = newProductName;
+    }
+
+    public void setCategory(String newProductCategory){
+        this.category = newProductCategory;
+    }
+
+    public void setPrice(int newProductPrice){
+        this.price = newProductPrice;
+    }
 }

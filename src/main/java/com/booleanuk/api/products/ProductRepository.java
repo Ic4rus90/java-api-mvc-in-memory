@@ -28,5 +28,12 @@ public class ProductRepository {
                 orElseThrow();
     }
 
+    public Product updateProduct(int productID, ProductRequest productRequest){
+        Product product = getProductByID(productID);
+        product.setName(productRequest.getName());
+        product.setCategory(productRequest.getCategory());
+        product.setPrice(productRequest.getPrice());
+        return product;
+    }
 
 }
