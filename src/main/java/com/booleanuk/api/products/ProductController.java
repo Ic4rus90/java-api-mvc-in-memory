@@ -35,6 +35,12 @@ public class ProductController {
     @PutMapping("/{productID}")
     @ResponseStatus(HttpStatus.CREATED)
     public Product updateProduct(@PathVariable int productID, @RequestBody ProductRequest productRequest){
-        return this.repository.updateProduct(productID, productRequest);
+        return this.repository.update(productID, productRequest);
+    }
+
+    @DeleteMapping("/{productID}")
+    @ResponseStatus(HttpStatus.OK)
+    public Product deleteProduct(@PathVariable int productID){
+        return this.repository.delete(productID);
     }
 }

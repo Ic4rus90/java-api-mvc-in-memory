@@ -1,6 +1,5 @@
 package com.booleanuk.api.products;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class ProductRepository {
                 orElseThrow();
     }
 
-    public Product updateProduct(int productID, ProductRequest productRequest){
+    public Product update(int productID, ProductRequest productRequest){
         Product product = getProductByID(productID);
         product.setName(productRequest.getName());
         product.setCategory(productRequest.getCategory());
@@ -36,4 +35,9 @@ public class ProductRepository {
         return product;
     }
 
+    public Product delete(int productID){
+        Product product = getProductByID(productID);
+        productList.remove(product);
+        return product;
+    }
 }
