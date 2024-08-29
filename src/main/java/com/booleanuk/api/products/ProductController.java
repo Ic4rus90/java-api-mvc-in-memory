@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/products")
@@ -22,8 +23,12 @@ public class ProductController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Product> getAll(){
-        return this.repository.getAll();
+    public List<Product> getAll(@RequestParam (required = false) String productCategory){
+        if (productCategory == null){
+            return this.repository.getAll();
+        } else {
+            return this.repository.getProductsFromCategory(productCategory);
+        }
     }
 
     @GetMapping("/{productID}")
