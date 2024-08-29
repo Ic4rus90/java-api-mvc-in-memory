@@ -78,7 +78,7 @@ public class ProductRepository {
            return product;
        }
         else {
-            throw new ResponseStatusException(HttpStatusCode.valueOf(418), "Product with provided name already exists");
+            throw new ResponseStatusException(HttpStatusCode.valueOf(400), "Product with provided name already exists");
         }
     }
 
