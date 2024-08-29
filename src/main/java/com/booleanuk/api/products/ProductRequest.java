@@ -5,6 +5,8 @@ public class ProductRequest {
     private String category;
     private int price;
 
+    // TODO Try Lombok to generate getters and setters
+
     public ProductRequest(String productName, String productCategory, int productPrice){
         this.name = productName;
         this.category = productCategory;

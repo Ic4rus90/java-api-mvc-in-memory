@@ -1,9 +1,9 @@
 package com.booleanuk.api.products;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -47,22 +47,24 @@ public class ProductRepository {
     }
 
     public Product getProductByID(int productID){
+        // Highly unnecessary, but fun.
+        if (productID == 418){
+            throw new ResponseStatusException(HttpStatus.I_AM_A_TEAPOT,  "<img src='https://media2.giphy.com/media/ARmZmMqobLtZKrJRrU/200w.gif?cid=6c09b95287okszcbz59ao584wd835y08z53ju0u1pwjpok20&ep=v1_gifs_search&rid=200w.gif&ct=g'>");
+        }
+
         Optional<Product> product = productList.stream().filter(p->p.getId() == productID).findFirst();
         if (product.isPresent()){
             return product.get();
-        } else {
+        }
+        else {
             throw new ResponseStatusException(HttpStatusCode.valueOf(404), "Product not found.");
         }
     }
 
-    public boolean productExists(int productID){
-        return productList.stream().anyMatch(p->p.getId() == productID);
-    }
 
     public Product update(int productID, ProductRequest productRequest){
 
        if (!nameIsInUse(productRequest.getName())) {
-           // Gets product. Throws exception if does not exist.
            Product product = getProductByID(productID);
            product.setName(productRequest.getName());
            product.setCategory(productRequest.getCategory());
@@ -70,13 +72,13 @@ public class ProductRepository {
            return product;
        }
         else {
-            throw new ResponseStatusException(HttpStatusCode.valueOf(400), "Product with provided name already exists");
+            throw new ResponseStatusException(HttpStatusCode.valueOf(418), "Product with provided name already exists");
         }
     }
 
     public Product delete(int productID){
         Product product = getProductByID(productID);
-        productList.remove(product);
+        this.productList.remove(product);
         return product;
     }
 }
